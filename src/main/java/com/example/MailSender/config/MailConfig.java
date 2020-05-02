@@ -1,4 +1,4 @@
-package com.example.MailSender.mail;
+package com.example.MailSender.config;
 
 import java.util.Properties;
 

@@ -1,4 +1,4 @@
-package com.example.MailSender.accessingdatamysql;
+package com.example.MailSender.model;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

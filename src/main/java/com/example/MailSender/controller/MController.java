@@ -1,6 +1,7 @@
-package com.example.MailSender.accessingdatamysql;
+package com.example.MailSender.controller;
 
-import com.example.MailSender.mail.MyConstants;
+import com.example.MailSender.model.User;
+import com.example.MailSender.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;

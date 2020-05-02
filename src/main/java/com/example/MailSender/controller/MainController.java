@@ -1,4 +1,4 @@
-package com.example.MailSender.controllers;
+package com.example.MailSender.controller;
 
 
 import org.springframework.stereotype.Controller;

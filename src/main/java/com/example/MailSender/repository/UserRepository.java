@@ -1,8 +1,8 @@
-package com.example.MailSender.accessingdatamysql;
+package com.example.MailSender.repository;
 
 import org.springframework.data.repository.CrudRepository;
 
-import com.example.MailSender.accessingdatamysql.User;
+import com.example.MailSender.model.User;
 
 // This will be AUTO IMPLEMENTED by Spring into a Bean called userRepository
 // CRUD refers Create, Read, Update, Delete
