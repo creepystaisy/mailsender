@@ -26,9 +26,7 @@ public class BatchBean {
     @Autowired
     private JavaMailSender emailSender;
 
-    @Scheduled(
-         initialDelay = 5000,
-         fixedRate = 15000)
+    @Scheduled(cron = "0 0 17 * * MON-FRI")
     public void cronJob() {
 
         Collection<User> users = (Collection<User>) userRepository.findAll();
@@ -39,8 +37,8 @@ public class BatchBean {
             SimpleMailMessage message = new SimpleMailMessage();
 
             message.setTo(user.getEmail());
-            message.setSubject("Test Simple Email");
-            message.setText("Hello, Im testing Simple Email");
+            message.setSubject("Время пить чай!!!");
+            message.setText("Пора пить чай!");
 
             // Send Message!
             this.emailSender.send(message);
