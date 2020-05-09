@@ -10,6 +10,8 @@ import com.example.MailSender.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -18,7 +20,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class BatchBean {
-
+    @Value("${emailsender.email.content.topic}")
+    String topic;
+    @Value("${emailsender.email.content.text}")
+    String text;
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -26,7 +31,8 @@ public class BatchBean {
     @Autowired
     private JavaMailSender emailSender;
 
-    @Scheduled(cron = "0 0 17 * * MON-FRI")
+
+    @Scheduled(initialDelayString = "${emailsender.schedule.initialDelay}",fixedDelayString = "${emailsender.schedule.fixedDelay}" )
     public void cronJob() {
 
         Collection<User> users = (Collection<User>) userRepository.findAll();
@@ -37,8 +43,9 @@ public class BatchBean {
             SimpleMailMessage message = new SimpleMailMessage();
 
             message.setTo(user.getEmail());
-            message.setSubject("Время пить чай!!!");
-            message.setText("Пора пить чай!");
+
+            message.setSubject(topic);
+            message.setText(text);
 
             // Send Message!
             this.emailSender.send(message);

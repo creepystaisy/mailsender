@@ -2,23 +2,30 @@ package com.example.MailSender.config;
 
 import java.util.Properties;
 
-import com.example.MailSender.mail.MyConstants;
+import org.springframework.beans.factory.annotation.Value;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
-@Configuration
-public class MailConfig {
 
+@Configuration
+
+public class MailConfig {
+    @Value("${emailsender.email.emailconstants.myemail}")
+    String MY_EMAIL;
+    @Value("${emailsender.email.emailconstants.password}")
+    String MY_PASSWORD;
     @Bean
     public JavaMailSender getJavaMailSender() {
         JavaMailSenderImpl mailSender = new JavaMailSenderImpl();
         mailSender.setHost("smtp.gmail.com");
         mailSender.setPort(587);
 
-        mailSender.setUsername(MyConstants.MY_EMAIL);
-        mailSender.setPassword(MyConstants.MY_PASSWORD);
+        
+        mailSender.setUsername(MY_EMAIL);
+        mailSender.setPassword(MY_PASSWORD);
 
         Properties props = mailSender.getJavaMailProperties();
         props.put("mail.transport.protocol", "smtp");
