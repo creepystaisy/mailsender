@@ -19,11 +19,27 @@ import org.springframework.stereotype.Component;
 
 
 @Component
+@ConfigurationProperties(prefix = "emailsender.email.content")
 public class BatchBean {
-    @Value("${emailsender.email.content.topic}")
     String topic;
-    @Value("${emailsender.email.content.text}")
     String text;
+
+    public String getTopic() {
+        return topic;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setTopic(String topic) {
+        this.topic = topic;
+    }
+
+    public void setText(String text) {
+        this.text = text;
+    }
+
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Autowired
@@ -32,7 +48,7 @@ public class BatchBean {
     private JavaMailSender emailSender;
 
 
-    @Scheduled(initialDelayString = "${emailsender.schedule.initialDelay}",fixedDelayString = "${emailsender.schedule.fixedDelay}" )
+    @Scheduled(cron = "${emailsender.schedule.cron}" )
     public void cronJob() {
 
         Collection<User> users = (Collection<User>) userRepository.findAll();

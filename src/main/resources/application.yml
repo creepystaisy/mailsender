@@ -9,8 +9,8 @@ emailsender:
       topic: "Время пить чай!!!"
       text: "Пора пить чай!"
     emailconstants:
-      myemail: "creepystaisy97@gmail.com"
-      password: "89198237590aA1bbB"
+      myemail: "testmailsender97@gmail.com"
+      password: "89198237590a"
   schedule:
-    initialDelay: 10000
-    fixedDelay: 10000
+    cron: "*/10 * * * * *"
+
