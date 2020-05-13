@@ -14,8 +14,15 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+
+import javax.mail.MessagingException;
+import javax.mail.internet.MimeMessage;
 
 
 @Component
@@ -49,22 +56,33 @@ public class BatchBean {
 
 
     @Scheduled(cron = "${emailsender.schedule.cron}" )
-    public void cronJob() {
+    public void cronJob() throws MessagingException {
 
         Collection<User> users = (Collection<User>) userRepository.findAll();
         logger.info("Start");
         for(User user : users)
         {
             logger.info(user.getEmail());
-            SimpleMailMessage message = new SimpleMailMessage();
+            MimeMessage message = emailSender.createMimeMessage();
 
-            message.setTo(user.getEmail());
+            boolean multipart = true;
 
-            message.setSubject(topic);
-            message.setText(text);
+            MimeMessageHelper helper = new MimeMessageHelper(message, true, "utf-8");
 
-            // Send Message!
+
+            String htmlMsg = "<h3>Im testing send a HTML email</h3>"
+                    +"";
+
+            message.setContent(htmlMsg , "text/html");
+
+            helper.setTo(user.getEmail());
+
+            helper.setSubject(topic);
+
+
             this.emailSender.send(message);
+
+
 
             logger.info("Email Sent!");
         }
