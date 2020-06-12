@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title th:text="${title}"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+</head>
+
+
+<body width 100vw>
+<header th:insert="blocks/header::header"></header>
+<p th:text="Hello!" />
+<div class="row">
+    <div class="col-md-4 order-md-2 mb-4">
+
+    </div>
+
+    <div class="col-md-8 order-md-1">
+        <form class="needs-validation" action="/" method="post" novalidate="">
+            <div class="mb-3">
+                <label for="username">Username</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text">@</span>
+                    </div>
+                    <input type="text" class="form-control" id="username" name="username" placeholder="Username" required="">
+                    <div class="invalid-feedback" style="width: 100%;">
+                        Your username is required.
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-3">
+                <label for="email">Email <span class="text-muted">(Optional)</span></label>
+                <input type="email" class="form-control" name="email" id="email" placeholder="you@example.com">
+                <div class="invalid-feedback">
+                    Please enter a valid email address for shipping updates.
+                </div>
+            </div>
+            <div class="col-md-4 order-md-2 mb-4">
+                <button class="btn btn-primary btn-lg btn-block" type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer th:insert="blocks/footer::footer"></footer>
+</body>
+</html>

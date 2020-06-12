@@ -1,0 +1,18 @@
+services:
+  # default configuration for services in *this* file
+  _defaults:
+    autowire: true      # Автоматически внедряет зависимости в ваши сервисы.
+    autoconfigure: true # Автоматически регистрирует ваши сервисы в качестве команд, подписчиков на события и т.д.
+emailsender:
+  email:
+    content:
+      topic: "Время пить чай!!!"
+      text: "Пора пить чай!"
+      cron2: "*/10 * * * * *"
+    emailconstants:
+      myemail: "testmailsender97@gmail.com"
+      password: "89198237590aA1"
+  schedule:
+    cron: "*/10 * * * * *"
+
+
